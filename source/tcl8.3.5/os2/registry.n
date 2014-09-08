@@ -1,0 +1,238 @@
+'\"
+'\" Copyright (c) 1997 Sun Microsystems, Inc.
+'\"
+'\" See the file "license.terms" for information on usage and redistribution
+'\" of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+'\"
+'\" SCCS: @(#) registry.n 1.5 97/08/11 19:33:27
+'\" 
+.so man.macros
+.TH registry n 8.0 Tcl "Tcl Built-In Commands"
+.BS
+'\" Note:  do not modify the .SH NAME line immediately below!
+.SH NAME
+registry \- Manipulate OS/2 profiles ("INI-files") or the Windows registry
+.SH SYNOPSIS
+.sp
+\fBpackage require registry 1.0\fR
+.sp
+\fBregistry \fIoption\fR \fIkeyName\fR ?\fIarg arg ...\fR?
+.BE
+
+.SH DESCRIPTION
+.PP
+The \fBregistry\fR package provides a general set of operations for
+manipulating OS/2 profiles (on OS/2) or the Windows registry (on Windows).
+The package implements the \fBregistry\fR Tcl command.  This command is only
+supported on the OS/2 and Windows platforms, with some differences in
+semantics.  Warning: this command should be used with caution as corrupted
+system profiles or registry can leave your system in an unusable state.
+.PP
+\fIKeyName\fR is the name of a registry key.  Registry keys must be
+one of the following forms:
+.IP
+\fB\e\e\fIhostname\fB\e\fIrootname\fB\e\fIkeypath\fR (Windows)
+.IP
+\fIrootname\fB\e\fIkeypath\fR (OS/2 and Windows)
+.IP
+\fIrootname\fR (OS/2 and Windows)
+.PP
+\fIHostname\fR specifies the name of any valid Windows host that exports its
+registry.
+.br
+On OS/2, the \fIrootname\fR component must be one of \fBUSER\fR (User profile
+OS2.INI), \fBSYSTEM\fR (System profile, OS2SYS.INI) or \fBBOTH\fR (only for
+querying, get information from either the User or System Profile).
+The \fIkeypath\fR may contain backslash (\fB\e\fR) characters. The resultant
+string is one key though, as OS/2 profiles have a fixed number of levels:
+applications which have keys which are set to values.
+.br
+On Windows, the \fIrootname\fR component must be one of
+\fBHKEY_LOCAL_MACHINE\fR, \fBHKEY_USERS\fR, \fBHKEY_CLASSES_ROOT\fR,
+\fBHKEY_CURRENT_USER\fR, or \fBHKEY_CURRENT_CONFIG\fR.
+The \fIkeypath\fR can be one or more registry key names separated by backslash
+(\fB\e\fR) characters.
+.PP
+\fIOption\fR indicates what to do with the registry key name.  Any
+unique abbreviation for \fIoption\fR is acceptable. In OS/2 profile parlance,
+the term for \fIkeyName\fR below would be \fIApplication Name\fR and the term
+for \fIvalueName\fR would be \fIKey Name\fR. The valid options on both OS/2
+and Windows are:
+.TP
+\fBregistry delete \fIkeyName\fR ?\fIvalueName\fR?
+.
+If the optional \fIvalueName\fR argument is present, the specified
+value under \fIkeyName\fR will be deleted from the registry.  If the
+optional \fIvalueName\fR is omitted, the specified key (Application) and any
+subkeys (Windows only) or values (Keys) beneath it in the profile / registry
+hierarchy will be deleted. On OS/2, if the specified Key is the last for the
+specified Application, the entire Application will be deleted, since no
+Applications without Keys can exist in the profiles. If the key could not be
+deleted then an error is generated.
+If the key did not exist, the command has no effect.
+.TP
+\fBregistry get \fIkeyName valueName\fR ?\fIasType\fR?
+.
+Returns the data associated with the value (Key) \fIvalueName\fR under the key
+(Application) \fIkeyName\fR.  If either the key (Application) or the value (Key)
+does not exist, then an error is generated. The \fIasType\fR argument is only
+applicable to OS/2, since the profiles don't store data as a particular type,
+so the querying application determines how it is seen. For more details on the
+format of the returned data, see SUPPORTED TYPES, below.
+.TP
+\fBregistry keys \fIkeyName\fR ?\fIpattern\fR?
+.
+If \fIpattern\fR isn't specified, returns a list of names of all the Keys
+in the Application \fIkeyName\fR (OS/2) or subkeys of \fIkeyName\fR (Windows).
+If \fIpattern\fR is specified, only those names matching \fIpattern\fR are
+returned.  Matching is determined using the same rules as for \fBstring\fR
+\fBmatch\fR.  If the specified \fIkeyName\fR does not exist, then an error is
+generated.
+.TP
+\fBregistry set \fIkeyName\fR ?\fIvalueName data \fR?\fItype\fR??
+.
+The ?\fIvalueName data \fR?\fItype\fR?? part is only optional on Windows from
+a functional perspective; the OS/2 version will not complain and will report
+success, but an Application without any Keys is not possible.
+On Windows, If \fIvalueName\fR isn't specified, creates the key \fIkeyName\fR
+if it doesn't already exist.  If \fIvalueName\fR is specified, creates
+the key (Application) \fIkeyName\fR and value (Key) \fIvalueName\fR if
+necessary.  The contents of \fIvalueName\fR are set to \fIdata\fR with the type
+indicated by \fItype\fR.  If \fItype\fR isn't specified, the type \fBstring\fR
+(OS/2) or \fBsz\fR (Windows) is assumed.  For more details on the data and type
+arguments, see SUPPORTED TYPES below.
+.TP
+\fBregistry type \fIkeyName valueName\fR
+.
+Returns the type of the value (Key) \fIvalueName\fR in the key (Application)
+\fIkeyName\fR.  For more information on the possible types, see SUPPORTED
+TYPES, below.
+.TP
+\fBregistry values \fIkeyName\fR ?\fIpattern\fR?
+.
+If \fIpattern\fR isn't specified, returns a list of names of all the
+values of \fIkeyName\fR.  If \fIpattern\fR is specified, only those
+names matching \fIpattern\fR are returned.  Matching is determined
+using the same rules as for \fBstring\fR \fBmatch\fR.
+
+.PP
+On OS/2, the following options (all terminology in OS/2 profile paralance) are
+additionally supported to fit in more with the organisation of the profiles.
+This saves you computational effort in Tcl eg. to extract only Keys for one
+Application, but at the expense of portability between Windows and OS/2.
+.TP
+\fBregistry apps \fIprofile\fR ?\fIpattern\fR?
+.
+If \fIpattern\fR isn't specified, returns a list of names of all the
+Applications in the specified profile.
+If \fIpattern\fR is specified, only those names matching \fIpattern\fR are
+returned.  Matching is determined using the same rules as for \fBstring\fR
+\fBmatch\fR.  If the specified \fIprofile\fR does not exist, then it is
+created.
+.TP
+\fBregistry appkeys \fIappName\fR ?\fIpattern\fR?
+.
+If \fIpattern\fR isn't specified, returns a list of names of all the Keys
+in the specified Application \fIappName\fR (OS/2).
+If \fIpattern\fR is specified, only those names matching \fIpattern\fR are
+returned.  Matching is determined using the same rules as for \fBstring\fR
+\fBmatch\fR.  If the specified \fIkeyName\fR does not exist, then an error is
+generated.
+.TP
+\fBregistry appset \fIappName\fR \fIkeyName data \fR?\fItype\fR?
+.
+Creates the Application \fIappName\fR and Key \fIkeyName\fR if necessary.
+The contents of \fIkeyName\fR are set to \fIdata\fR with the type indicated by
+\fItype\fR.  If \fItype\fR isn't specified, the type \fBstring\fR is assumed.
+For more details on the data and type arguments, see SUPPORTED TYPES below.
+
+.SH "SUPPORTED TYPES"
+Each value (Key) under a key (Application) in the profile / registry contains
+some data of a particular type in a type-specific representation.  The
+\fBregistry\fR command converts between this internal representation and one
+that can be manipulated by Tcl scripts.  In most cases, the data is simply
+returned as a Tcl string.  The type indicates the intended use for the
+data, but does not actually change the representation.  For some
+types, the \fBregistry\fR command returns the data in a different form to
+make it easier to manipulate.  The following types are recognized by the
+registry command:
+.PP
+OS/2
+.TP
+\fBbinary\fR
+.
+The registry value contains arbitrary binary data.  The data is represented
+exactly in Tcl, including any embedded nulls.
+.TP
+\fBlong\fR
+.
+The registry value contains a little-endian 32-bit number.  The data is
+represented in Tcl as a decimal string. For compatibility in scripts, the type
+\fBdword\fR (as for Windows) is also allowed.
+.TP
+\fBstring\fR
+.
+The registry value contains a null-terminated string.  The data is 
+represented in Tcl as a string. For compatibility in scripts, the type \fBsz\fR
+(as for Windows) is also allowed.
+.PP
+Windows
+.TP 17
+\fBbinary\fR
+.
+The registry value contains arbitrary binary data.  The data is represented
+exactly in Tcl, including any embedded nulls.
+.TP
+\fBnone\fR
+.
+The registry value contains arbitrary binary data with no defined
+type.  The data is represented exactly in Tcl, including any embedded
+nulls.
+.TP
+\fBsz\fR
+.
+The registry value contains a null-terminated string.  The data is 
+represented in Tcl as a string.
+.TP
+\fBexpand_sz\fR
+.
+The registry value contains a null-terminated string that contains
+unexpanded references to environment variables in the normal Windows
+style (for example, "%PATH%").  The data is represented in Tcl as a
+string.
+.TP
+\fBdword\fR
+.
+The registry value contains a little-endian 32-bit number.  The data is
+represented in Tcl as a decimal string.
+.TP
+\fBdword_big_endian\fR
+.
+The registry value contains a big-endian 32-bit number.  The data is
+represented in Tcl as a decimal string.
+.TP
+\fBlink\fR
+.
+The registry value contains a symbolic link.  The data is represented
+exactly in Tcl, including any embedded nulls.
+.TP
+\fBmulti_sz\fR
+.
+The registry value contains an array of null-terminated strings.  The
+data is represented in Tcl as a list of strings.
+.TP
+\fBresource_list\fR
+.
+The registry value contains a device-driver resource list.  The data
+is represented exactly in Tcl, including any embedded nulls.
+.PP
+In addition to the symbolically named types listed above, unknown
+types are identified using a 32-bit integer that corresponds to the
+type code returned by the system interfaces.  In this case, the data
+is represented exactly in Tcl, including any embedded nulls.
+
+.SH "PORTABILITY ISSUES"
+The registry command is only available on OS/2 and Windows.
+
+.SH KEYWORDS
+registry

@@ -1,0 +1,8 @@
+LIBRARY pkgd
+DESCRIPTION 'Package loading test package D'
+EXETYPE OS2
+PROTMODE
+STACKSIZE 32768
+EXPORTS
+Pkgd_Init @1
+Pkgd_SafeInit @2

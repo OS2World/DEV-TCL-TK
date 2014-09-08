@@ -1,0 +1,110 @@
+#include <os2.h>
+#include "TkResIDs.h"
+;
+; Icons
+;
+
+ICON                      Tk    DISCARDABLE     "rc/Tk83.ico"
+
+;
+; Dialogs
+;
+DLGTEMPLATE ID_COLORDLGTEMPLATE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Color Selection", ID_COLORDLG, 59, 13, 200, 130, WS_VISIBLE,
+            FCF_SYSMENU | FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+        CONTROL     "Color Wheel",ID_COLORWHEEL, 15,30,180,100,
+                    "ColorSelectClass", WS_VISIBLE
+        PUSHBUTTON  "OK", ID_OK, 15, 7, 50, 14
+        PUSHBUTTON  "Cancel", ID_CANCEL, 72, 7, 50, 14
+        PUSHBUTTON  "Tk Dialog", ID_TKVERSION, 129, 7, 50, 14
+    END
+END
+;
+; Bitmaps
+;
+
+BITMAP                  buttons  DISCARDABLE     "rc/buttons.bmp"
+
+;
+; Cursors
+;
+
+POINTER                X_cursor  DISCARDABLE     "rc/cursor00.cur"
+POINTER                   arrow  DISCARDABLE     "rc/cursor02.cur"
+POINTER        based_arrow_down  DISCARDABLE     "rc/cursor04.cur"
+POINTER          based_arrow_up  DISCARDABLE     "rc/cursor06.cur"
+POINTER                    boat  DISCARDABLE     "rc/cursor08.cur"
+POINTER                bogosity  DISCARDABLE     "rc/cursor0a.cur"
+POINTER      bottom_left_corner  DISCARDABLE     "rc/cursor0c.cur"
+POINTER     bottom_right_corner  DISCARDABLE     "rc/cursor0e.cur"
+POINTER             bottom_side  DISCARDABLE     "rc/cursor10.cur"
+POINTER              bottom_tee  DISCARDABLE     "rc/cursor12.cur"
+POINTER              box_spiral  DISCARDABLE     "rc/cursor14.cur"
+POINTER              center_ptr  DISCARDABLE     "rc/cursor16.cur"
+POINTER                  circle  DISCARDABLE     "rc/cursor18.cur"
+POINTER                   clock  DISCARDABLE     "rc/cursor1a.cur"
+POINTER              coffee_mug  DISCARDABLE     "rc/cursor1c.cur"
+POINTER                   cross  DISCARDABLE     "rc/cursor1e.cur"
+POINTER           cross_reverse  DISCARDABLE     "rc/cursor20.cur"
+POINTER               crosshair  DISCARDABLE     "rc/cursor22.cur"
+POINTER           diamond_cross  DISCARDABLE     "rc/cursor24.cur"
+POINTER                     dot  DISCARDABLE     "rc/cursor26.cur"
+POINTER                  dotbox  DISCARDABLE     "rc/cursor28.cur"
+POINTER            double_arrow  DISCARDABLE     "rc/cursor2a.cur"
+POINTER             draft_large  DISCARDABLE     "rc/cursor2c.cur"
+POINTER             draft_small  DISCARDABLE     "rc/cursor2e.cur"
+POINTER              draped_box  DISCARDABLE     "rc/cursor30.cur"
+POINTER                exchange  DISCARDABLE     "rc/cursor32.cur"
+POINTER                   fleur  DISCARDABLE     "rc/cursor34.cur"
+POINTER                 gobbler  DISCARDABLE     "rc/cursor36.cur"
+POINTER                   gumby  DISCARDABLE     "rc/cursor38.cur"
+POINTER                   hand1  DISCARDABLE     "rc/cursor3a.cur"
+POINTER                   hand2  DISCARDABLE     "rc/cursor3c.cur"
+POINTER                   heart  DISCARDABLE     "rc/cursor3e.cur"
+POINTER                   xicon  DISCARDABLE     "rc/cursor40.cur"
+POINTER              iron_cross  DISCARDABLE     "rc/cursor42.cur"
+POINTER                left_ptr  DISCARDABLE     "rc/cursor44.cur"
+POINTER               left_side  DISCARDABLE     "rc/cursor46.cur"
+POINTER                left_tee  DISCARDABLE     "rc/cursor48.cur"
+POINTER              leftbutton  DISCARDABLE     "rc/cursor4a.cur"
+POINTER                ll_angle  DISCARDABLE     "rc/cursor4c.cur"
+POINTER                lr_angle  DISCARDABLE     "rc/cursor4e.cur"
+POINTER                     man  DISCARDABLE     "rc/cursor50.cur"
+POINTER            middlebutton  DISCARDABLE     "rc/cursor52.cur"
+POINTER                   mouse  DISCARDABLE     "rc/cursor54.cur"
+POINTER                  pencil  DISCARDABLE     "rc/cursor56.cur"
+POINTER                  pirate  DISCARDABLE     "rc/cursor58.cur"
+POINTER                    plus  DISCARDABLE     "rc/cursor5a.cur"
+POINTER          question_arrow  DISCARDABLE     "rc/cursor5c.cur"
+POINTER               right_ptr  DISCARDABLE     "rc/cursor5e.cur"
+POINTER              right_side  DISCARDABLE     "rc/cursor60.cur"
+POINTER               right_tee  DISCARDABLE     "rc/cursor62.cur"
+POINTER             rightbutton  DISCARDABLE     "rc/cursor64.cur"
+POINTER                rtl_logo  DISCARDABLE     "rc/cursor66.cur"
+POINTER                sailboat  DISCARDABLE     "rc/cursor68.cur"
+POINTER           sb_down_arrow  DISCARDABLE     "rc/cursor6a.cur"
+POINTER       sb_h_double_arrow  DISCARDABLE     "rc/cursor6c.cur"
+POINTER           sb_left_arrow  DISCARDABLE     "rc/cursor6e.cur"
+POINTER          sb_right_arrow  DISCARDABLE     "rc/cursor70.cur"
+POINTER             sb_up_arrow  DISCARDABLE     "rc/cursor72.cur"
+POINTER       sb_v_double_arrow  DISCARDABLE     "rc/cursor74.cur"
+POINTER                 shuttle  DISCARDABLE     "rc/cursor76.cur"
+POINTER                  sizing  DISCARDABLE     "rc/cursor78.cur"
+POINTER                  spider  DISCARDABLE     "rc/cursor7a.cur"
+POINTER                spraycan  DISCARDABLE     "rc/cursor7c.cur"
+POINTER                    star  DISCARDABLE     "rc/cursor7e.cur"
+POINTER                  target  DISCARDABLE     "rc/cursor80.cur"
+POINTER                  tcross  DISCARDABLE     "rc/cursor82.cur"
+POINTER          top_left_arrow  DISCARDABLE     "rc/cursor84.cur"
+POINTER         top_left_corner  DISCARDABLE     "rc/cursor86.cur"
+POINTER        top_right_corner  DISCARDABLE     "rc/cursor88.cur"
+POINTER                top_side  DISCARDABLE     "rc/cursor8a.cur"
+POINTER                 top_tee  DISCARDABLE     "rc/cursor8c.cur"
+POINTER                    trek  DISCARDABLE     "rc/cursor8e.cur"
+POINTER                ul_angle  DISCARDABLE     "rc/cursor90.cur"
+POINTER                umbrella  DISCARDABLE     "rc/cursor92.cur"
+POINTER                ur_angle  DISCARDABLE     "rc/cursor94.cur"
+POINTER                   watch  DISCARDABLE     "rc/cursor96.cur"
+POINTER                   xterm  DISCARDABLE     "rc/cursor98.cur"

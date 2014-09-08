@@ -1,0 +1,7 @@
+#include <os2.h>
+#define Wish83 1
+;
+; Icons
+;
+
+ICON Wish83 DISCARDABLE     "rc/Wish83.ico"

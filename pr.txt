@@ -1,0 +1,303 @@
+Problem Reports
+===============
+Last change: 02 October 2003
+
+Num Added on Solved   Description
+--- -------- -------- ------------------------------------------------------
+8.3.5
+=====
+152 20031001          Clicking MB1 in a window doesn't raise it/make it get the
+                      focus.
+151 20031001          Widget demo, menubuttons: the mouse disappears over the
+                      menubutton after releasing MB1 following clicking on a
+                      menubutton.
+150 20030426          Widget demo: first shows lower on screen, pressing BTN1
+                      on titlebar to move makes the outline of the window
+                      appear below the actual window. After moving it (the
+                      window does move to its new location), retrying this does
+                      NOT exhibit this behaviour anymore. Some false
+                      initialisation, obviously.
+149 20030102 20030930 Scrollbar in widget demo doesn't work.
+                      The call to Tk_TranslateOS2Event in ScrollbarProc will
+                      generate pointer events for button presses in the
+                      scrollbar and then return 1, thereby "hiding" the button
+                      presses from the scrollbar control. That in turn prevents
+                      it from generating WM_VSCROLL / WM_HSCROLL messages.
+                      WM_*SCROLL then reached only the owner, not ScrollbarProc,
+                      because the reflection of them was commented out.
+148 20021230 20021231 Toplevel menu entries of the wish83.exe console have an
+                      ampersand (&) before the letter that should be underlined.
+                      This is the way we have to let Windows know which letter
+                      to underline, which I obviously didn't change to the tilde
+                      that's used to signify that to Presentation Manager.
+147 20021230 20030102 Typing return in the wish83.exe console only results in
+                      a "tone" character being displayed (in blue), not having
+                      the typed command (in green) executed.
+                      This was just a stupid array bounds problem; I started the
+                      keymap array in tkOS2Key.c with the value 0x1 in the first
+                      place, which OBVIOUSLY! is indexed by _0_ in C, not 1. So
+                      the return was mistakenly reported as left shift...
+146 20021229 20021230 tkOS2Font.c: the fonts "System Monospaced", "System
+                      Proportional" and "WarpSans" should be preselected into
+                      the global PS (in tkOS2Init.c), so they can be used by
+                      just using their ID (like Windows lets that port use a
+                      symbolic constant to create a system font).
+                      When we run out of font IDs or encounter an error when
+                      trying to create a logical font, we return font ID 0,
+                      which results in the default font being used.
+145 20021224 20021224 tclOS2Thrd.c: DosAllocThreadLocalMemory is called so many
+                      times from Tk that the thread local memory space (32
+                      DWORDs, 128 bytes) is exhausted and it returns 8
+                      (ERROR_NOT_ENOUGH_MEMORY).
+                      Solved by adopting parts of the pthreads package, and
+                      using the code from tclUnixThrd.c using it.
+144 20021217 20021224 Crash at the call to Tcl_PkgRequireEx in Tk_InitStubs
+                      (file tkStubLib.c) when compiling without USE_TCL_STUBS.
+                      This goes away when removing the lines
+                          #ifndef USE_TCL_STUBS
+                          #define USE_TCL_STUBS
+                          #endif
+                      This isn't a problem when compiling with USE_TCL_STUBS,
+                      but then we have to move the initialization of PM
+                      (concentrated to one call, TkOS2XInit()) to Tcl_AppInit
+                      in os2Main, since we canot use any Tcl function from the
+                      Tk DLL then.
+143 20021126          To get correct string width computations, they should be
+                      done in units of 1/256th of a pixel (courtesy of a posting
+                      by Ilya Zakharevich in comp.os.os2.programmer.misc on
+                      2002-10-23).
+142 20021126          Assigning font IDs done by braindead "next free" method.
+                      Freeing the non-last font will leave a hole. Should be
+                      some kind of list of free IDs (see menu ID's in
+                      TkOS2Menu.c?) or hash table.
+141 20021102          Manipulate lastCommandID in tkOS2Button.c thread-safely.
+140 20021102          Make global variables in tkOS2Int.h and tkOS2Init.c
+                      thread-global.
+139 (8.0.5)  20021026 Generating INF file crashes IPFC.exe.
+                      This turns out to happen in the output of keysyms.n (Tk)
+                      at the 'hebrew_resh' line. Removing 'hebrew_resh' through
+                      'Delete' (ie. keep the list upto 'hebrew_kuf') will avoid
+                      the crash. Obviously, (yet) another implementation limit
+                      of IPFC is encountered (the Borland one will trip over
+                      some long lines; I use the IBM one from July 21 1998
+                      (4.00.006). Inserting another .CE/.CS pair doesn't help,
+                      neither does removing all 'hebrew_' entries. Only removing
+                      exactly 113 entries helps. That means we are restricted to
+                      exactly 889 lines in a character graphic.
+                      Alas, hacking the manpage an man2ipf2.tcl to use a table
+                      or unordered list still turns out to encounter this limit.
+                      There's no other option than to put part of the list in
+                      a separate manpage. I've chosen to put the Cyrillic and
+                      Greek characters in a separate file "keysyms_cg.n".
+138                   Fill $tcl_platform(user) from %USER%.
+                      Query drives DosDevConfig (FSAT_REMOTEDRV?).
+8.3.3
+=====
+137 20011101 20011101 Getting info about floppy drives throws up system error
+                      dialogs.
+                      Disable (and reenable) with DosError(FERR_DISABLEHARDERR).
+8.0.5
+=====
+136 20010907 20010907 Tk Dialogs were created as children of the application
+                      toplevel instead of as toplevels, ie. children of the
+                      desktop. They were thus limited to the space that the 
+                      application toplevel offers, which is dumb in my view.
+                      The only reason I see for it would be in the Tcl Plugin,
+                      but that probably doesn't work anyway.
+                      My code therefore reverts to the 4.2 way: child of the
+                      DESKTOP. It's easily changed in the WinCreateWindow in
+                      tkOS2Wm.c though.
+135 2001???? 20010907 Windows version added HIT testing on non-client areas
+                      (WmProc in Tk*Wm.c). Trying to replicate such for frame
+                      controls resulted in screwed up tk_dialogs which couldn't
+                      be reached anymore, thus 'hanging' the app. Removed again.
+134 2001???? 20010907 Frame edges were insensitive (didn't turn pointer into
+                      sizing arrows when hovering over the edge), thus disabling
+                      resizing. This was also caused by the HIT testing, which
+                      normally gave HT_NORMAL (like the PM Guide and Reference
+                      seemed to suggest) but should give the result of calling
+                      the oldFrameProc instead (some funky hexadecimal).
+133 20000627 20000806 Native color dialog added, but not working yet.
+                      Now works. Only setting via color wheel, not by RGB
+                      numbers, but for that the Tk dialog can still be chosen.
+                      When starting SpecTcl, the color dialog comes up after
+                      the language dialog. This is because it's already shown
+                      at the time an unknown option is encountered, which is
+                      given in this case => check arguments first.
+132 20000426 20000426 (8.0.5b) Pointer doesn't change to resizing arrows when
+                      on size border of frame; no resizing either.
+                      WM_ADJUSTFRAMEPOS returned 0, now calls the subclassed
+                      (= default) frame window procedure.
+131 20000309 20000312 Tcl_Main not found in lib: tclOS2Main.c is in the exe
+                      instead of the lib.
+                      Now in DLL (and LIB). Now tclOS2AppInit.c has to be
+                      compiled with -DCLI_VERSION to get a CLI-version.
+130 20000226          Not all areas are repainted as required. Inserted
+                      WinFillRect(hps, &rectl, CLR_RED) in GenerateXEvent
+                      (tkOS2X.c) makes all these areas stick out (not
+                      overpainted by Tk) in debugging builds.
+129 20000127 20000515 After tabbing through the buttons in library\demos\
+                      radio.tcl, ALT-F4 puts Tk into an infinite loop of a
+                      WM_CHAR message in the ChildProc ("equivalent of
+                      WM_SYSKEYDOWN").
+                      This is because MenuKeyBindProc gets called with keysym
+                      XK_Alt_L, which ends up calling the window procedure for
+                      the key *again*, starting all over.
+                      This was likely done in the Windows port because of
+                      subclassing, but its use isn't clear. This is set up in
+                      TkpInitializeMenuBindings, whose comment mentions that it
+                      does nothing on Mac or the X Window System.
+                      So just take the latter route...
+128 20000106(20000516)Menus: pointer disappears when moving over an old- style
+                      menu that's been mapped normally (works OK on torn-off
+                      tear-offs).
+                      This was because Tk_PointerEvent was made to return on a
+                      null tkwin (i.e. when the captured mouse is over a non-Tk
+                      window), which made Tk crash some time in the past. Now
+                      the mouse "only" flickers off and on again when moving
+                      the mouse (again, except in torn-off tear-offs).
+127 20000106 20000322 Menus: When mapping the menu as a tear-off, the marks
+                      don't look correctly (they do when mapping normally).
+                      The mark appears strange because it's drawn using the
+                      system bitmap SBMP_MENUATTACHED instead of having the
+                      menu control handle it by specifying a child menu handle
+                      and flag MIS_SUBMENU.
+                      See 126. Don't do any SBMP_ drawing anymore.
+126 20000106 20000322 Menus: cascade marks disappear when selecting the item.
+                      Only draw the item, let the system handle the check marks
+                      and submenu bitmaps. Only react to WM_DRAWITEM when the
+                      Attributes are the same (the PM Guide tells "when the
+                      state fields are the same" but then gives an example for
+                      the attribute fields. The latter works.
+                      Has the trade-off that -activebackground and
+                      -activeforeground are effectively ignored; any used
+                      non-active colors are just inverted.
+125 20000106 20000106 Menus: when mapping the menu as a tear-off turn up in a
+                      wrong position vertically.
+                      The function DrawMenuEntryAccelerator used the X y
+                      coordinate instead of translating to PM (except for the
+                      baseline calculation!).
+124 20000101 20000119 Widget demo, canvas types: stippled text truncated at
+                      baseline (descenders "pp" aren't there).
+                      Descenders were cut off because BitBlt-ing was done with
+                      the RefPoint (=baseline) as origin.
+123 19991216 19991231 (Tcl) COM-port cannot be fconfigure-d with -mode; the
+                      Windows name "COM1:" isn't recognized (OS/2 uses "COM1".
+                      Re-implemented with DosDevIOCtl instead of Posix (EMX)
+                      stuff. Separate call for baud higher than 19200.
+122 19991209 19991212 Put up a first beta that turned out to not run correctly
+                      on a 256 color (palette manager) system.
+                      Every place where Gpi*LogColorTable was used needed to
+                      check aDevCaps[CAPS_ADDITIONAL_GRAPHICS] &
+                      CAPS_PALETTE_MANAGER and take appropriate action.
+121 19991204          Underlined letter in a menu doesn't invoke.
+                      E.g. widget demo: Alt-F gives the file menu, but then
+                      typing q doesn't invoke Quit.
+                      It *does* invoke on a torn-off tear-off menu though.
+120 19991202 19991202 Tcl80.dll set the focus to the desktop to make sure the
+                      pointer was reinstated after using Tclpm's Terminal
+                      window, always necessitating a click to focus on a
+                      program, possibly the one that started Tclpm / wish. Now
+                      achieved by using WinShowPointer.
+119 19991117 19991118 'load tk80' in tclsh (tclpm80) gives sigFPE.
+                      Initialization (TclOS2PMInitialize) was wrong, remember
+                      if we've already initialized.
+118 19991116 19991117 tcl_pkgPath isn't filled correctly (ib/tcl8.0).
+                      Caused by (wrong) usage of Tcl_DStringResult.
+117 19991109 20000402 Switching to wish via Ctrl-Esc doesn't bring it to the
+                      front.
+                      Added WM_FOCUSCHANGE handling in TkOS2Wm.c, where the
+                      frame is brought to the top unless the FC_NOSETACTIVE,
+                      FC_NOBRINGTOTOP and FC_NOBRINGTOPFIRSTWINDOW have been
+                      used. The FC_NOSETACTIVE flag is set when you have
+                      focus-follows-mouse (e.g. with FeelX) and move the mouse
+                      over the window; It's not set via Ctrl-Esc.
+116 19991006 20000226 SpecTcl: widget choices aren't highlighted, chosen nor
+                      can they be dragged to the canvas.
+                      Tk_TranslateOS2Event wasn't called for WM_BUTTON1 / 2 /
+                      3 / UP / DOWN, but only the button window procedure.
+115 19990731 19990731 Horizontal scrollbar doesn't react.
+                      TkpScrollbarPosition gave OUTSIDE inapropriately.
+                      Caused by faulty computation in Tk_GetRootCoords
+                      (tkOS2Wm.c).
+114 19990726 19990726 When environment variable LANG is set to DE_DE, then
+                      "expr 3.14" fails with a syntax error (like for
+                      "expr 3,14", which fails no matter what LANG is set to,
+                      NL_NL, EN_US, LC_C_GERMANY, ...). However, when it is set
+                      to LC_C_GERMANY, it does not fail.
+                      Function setlocale() only works correctly for DE_DE!
+                      The source for EMX (\emx\src\lib\locale\locales.c) shows
+                      that only "C", "FRAN", "GERM", "ITAL", "SPAI", "UK",
+                      "USA", "de_de", "en_us" and "en_gb" are supported ("NETH"
+                      and "NORW" are commented out).
+                      Always setting "C" locale makes the problem go away;
+                      funnily Tk (wish) already did that.
+113 19990724          Creation of toplevel doesn't yet support embedding.
+               Not really a bug.
+112 19990715          Font in Tclshpm terminal should be chosen via an INI
+                      setting (if necessary overridden by environment).
+               Not a bug.
+111 19990709 19990718 Man-page registry.n should be updated for OS/2 INI version
+                      (and included in the INF file).
+110 19990708 19990722 Typing Alt (to try to do Alt-F4) in button.tcl causes a
+                      crash.
+                      The variable oldMenuProc in tkOS2Menu.c wasn't initialized
+                      when there was no menu => set to WinDefWindowProc by
+                      default.
+109 19990707 20000518 The right side of the focus ring on the text of the
+                      radiobuttons in radio.tk is clipped off.
+                      Accidentally held on to the Windows port's use of a RECT
+                      instead of using purely width and height in the
+                      calculation for WinCreateCursor.
+108 19990707 19991204 Buttons don't clear the focus ring when the focus is
+                      removed (by eg. Tab).
+                      Added WinDestroyCursor at end of TkpDisplayButton.
+107 19990707 19990802 Radio- and checkbuttons get a light yellow background.
+                      TkpGetColor returned the index (eg. -40) for system colors
+                      instead of RGB (via WinQuerySysColor), so it would select
+                      color ffffd8 (which is -40 in hex).
+106 19990707 19990829 Text on (new style) menus are "double" bold, ie. the
+                      standard menu font "9.WarpSans Bold" gets boldened.
+                      Don't use FATTR_SEL_BOLD (and _ITALIC) when the font name
+                      already contains "Bold" ("Italic") (tkOS2Font.c).
+105 19990707          Bitmaps in the canvas items demo and the mail bitmaps in
+                      the iconic button demo are reversed on first showing.
+                      Color problem.
+104 19990707          Akin to 102: stippled canvas items (line, curve, polygon,
+                      rectangle, oval, text) don't show up until moving the
+                      mouse over them (inverting and reverting).
+103 19990707          Stippling of text (both background and foreground) in
+                      "Text display styles" in the widget demo doesn't work
+                      correctly. Some stippling is visible when selecting
+                      across the stippled characters.
+102 19990707 20000226 Moving the mouse into the main window when running
+                      menu.tcl or button.tcl throws up a dialog "Error: unknown
+                      option "-type"". Dismissing it by clicking on a button
+                      causes a crash. Same happens when clicking (not pressing
+                      enter on keyboard) the OK button in the target language
+                      selection in SpecTcl.
+                      Somewhere the display in a TkWindow gets corrupted, so
+                      that the (macro) call to RootWindow in function
+                      InitializeEvent in tkPointer.c accesses memory illegally.
+                      Call stack: Tk_TranslateOS2Event (WM_MOUSEMOVE),
+                      Tk_PointerEvent, GenerateEnterLeave, InitializeEvent.
+                      The 'lastWinPtr' variable in tkPointer.c, which is used
+                      to remember the window having the focus until now, isn't
+                      reset to NULL when a button is destroyed as is done in
+                      XDestroyWindow (tkOS2Window.c) by calling
+                      TkPointerDeadWindow. Calling that makes the problem go
+                      away. The same likely holds for Menus and Scrollbars but
+                      hadn't shown up yet.
+101 19990707          SpecTcl: Selecting the bottom gridline and dragging it
+                      down makes it go UP to the bottom gridline of the first
+                      row. Using the line in the left margin for this (dragging
+                      down) does work.
+                      Temporarily removing the call to Tk_PointerEvent fixes
+                      this (in TkOS2TranslateEvent), so ....
+100 19990707 19990829 SpecTcl: The initial target selection dialog shows up at
+                      0,0 instead of the middle of the screen.
+                      The "geom" update didn't get through before the new values
+                      were needed => UpdateGeometryInfo inserted in
+                      TkpWmSetState.
+
+No specific bug tracking was administered before 7 July 1999.

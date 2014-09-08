@@ -1,0 +1,7 @@
+LIBRARY pkge
+DESCRIPTION 'Package loading test package E'
+EXETYPE OS2
+PROTMODE
+STACKSIZE 32768
+EXPORTS
+Pkge_Init @1

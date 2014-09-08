@@ -1,0 +1,8 @@
+LIBRARY pkgc
+DESCRIPTION 'Package loading test package C'
+EXETYPE OS2
+PROTMODE
+STACKSIZE 32768
+EXPORTS
+Pkgc_Init @1
+Pkgc_SafeInit @2

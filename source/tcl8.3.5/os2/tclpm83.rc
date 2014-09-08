@@ -1,0 +1,7 @@
+#include <os2.h>
+#define Tclshpm 1
+;
+; Icons
+;
+
+ICON                   Tclshpm    DISCARDABLE     "TclPM83.ico"

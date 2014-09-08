@@ -1,0 +1,97 @@
+/* SM$FO G:\get\net\Tk-4.1a0.my\pTk\mTk\open32\h\rc\tkwin.rc - Saturday  07/13/1996  15:01:50 */
+// SCCS: @(#) tk.rc 1.12 96/04/12 18:08:04
+//
+// Version
+//
+
+#include <patchlevel.h>
+#include "tkwin.HHH"
+
+
+//
+// Icon
+//
+
+ICON                      tk    DISCARDABLE     "tk.ico"
+
+//
+// Cursor
+//
+
+POINTER                X_cursor  DISCARDABLE     "cursor00.cur"
+POINTER                   arrow  DISCARDABLE     "cursor02.cur"
+POINTER        based_arrow_down  DISCARDABLE     "cursor04.cur"
+POINTER          based_arrow_up  DISCARDABLE     "cursor06.cur"
+POINTER                    boat  DISCARDABLE     "cursor08.cur"
+POINTER                bogosity  DISCARDABLE     "cursor0a.cur"
+POINTER      bottom_left_corner  DISCARDABLE     "cursor0c.cur"
+POINTER     bottom_right_corner  DISCARDABLE     "cursor0e.cur"
+POINTER             bottom_side  DISCARDABLE     "cursor10.cur"
+POINTER              bottom_tee  DISCARDABLE     "cursor12.cur"
+POINTER              box_spiral  DISCARDABLE     "cursor14.cur"
+POINTER              center_ptr  DISCARDABLE     "cursor16.cur"
+POINTER                  circle  DISCARDABLE     "cursor18.cur"
+POINTER                   clock  DISCARDABLE     "cursor1a.cur"
+POINTER              coffee_mug  DISCARDABLE     "cursor1c.cur"
+POINTER                   cross  DISCARDABLE     "cursor1e.cur"
+POINTER           cross_reverse  DISCARDABLE     "cursor20.cur"
+POINTER               crosshair  DISCARDABLE     "cursor22.cur"
+POINTER           diamond_cross  DISCARDABLE     "cursor24.cur"
+POINTER                     dot  DISCARDABLE     "cursor26.cur"
+POINTER                  dotbox  DISCARDABLE     "cursor28.cur"
+POINTER            double_arrow  DISCARDABLE     "cursor2a.cur"
+POINTER             draft_large  DISCARDABLE     "cursor2c.cur"
+POINTER             draft_small  DISCARDABLE     "cursor2e.cur"
+POINTER              draped_box  DISCARDABLE     "cursor30.cur"
+POINTER                exchange  DISCARDABLE     "cursor32.cur"
+POINTER                   fleur  DISCARDABLE     "cursor34.cur"
+POINTER                 gobbler  DISCARDABLE     "cursor36.cur"
+POINTER                   gumby  DISCARDABLE     "cursor38.cur"
+POINTER                   hand1  DISCARDABLE     "cursor3a.cur"
+POINTER                   hand2  DISCARDABLE     "cursor3c.cur"
+POINTER                   heart  DISCARDABLE     "cursor3e.cur"
+POINTER                    xicon  DISCARDABLE     "cursor40.cur"
+POINTER              iron_cross  DISCARDABLE     "cursor42.cur"
+POINTER                left_ptr  DISCARDABLE     "cursor44.cur"
+POINTER               left_side  DISCARDABLE     "cursor46.cur"
+POINTER                left_tee  DISCARDABLE     "cursor48.cur"
+POINTER              leftbutton  DISCARDABLE     "cursor4a.cur"
+POINTER                ll_angle  DISCARDABLE     "cursor4c.cur"
+POINTER                lr_angle  DISCARDABLE     "cursor4e.cur"
+POINTER                     man  DISCARDABLE     "cursor50.cur"
+POINTER            middlebutton  DISCARDABLE     "cursor52.cur"
+POINTER                   mouse  DISCARDABLE     "cursor54.cur"
+POINTER                  pencil  DISCARDABLE     "cursor56.cur"
+POINTER                  pirate  DISCARDABLE     "cursor58.cur"
+POINTER                    plus  DISCARDABLE     "cursor5a.cur"
+POINTER          question_arrow  DISCARDABLE     "cursor5c.cur"
+POINTER               right_ptr  DISCARDABLE     "cursor5e.cur"
+POINTER              right_side  DISCARDABLE     "cursor60.cur"
+POINTER               right_tee  DISCARDABLE     "cursor62.cur"
+POINTER             rightbutton  DISCARDABLE     "cursor64.cur"
+POINTER                rtl_logo  DISCARDABLE     "cursor66.cur"
+POINTER                sailboat  DISCARDABLE     "cursor68.cur"
+POINTER           sb_down_arrow  DISCARDABLE     "cursor6a.cur"
+POINTER       sb_h_double_arrow  DISCARDABLE     "cursor6c.cur"
+POINTER           sb_left_arrow  DISCARDABLE     "cursor6e.cur"
+POINTER          sb_right_arrow  DISCARDABLE     "cursor70.cur"
+POINTER             sb_up_arrow  DISCARDABLE     "cursor72.cur"
+POINTER       sb_v_double_arrow  DISCARDABLE     "cursor74.cur"
+POINTER                 shuttle  DISCARDABLE     "cursor76.cur"
+POINTER                  sizing  DISCARDABLE     "cursor78.cur"
+POINTER                  spider  DISCARDABLE     "cursor7a.cur"
+POINTER                spraycan  DISCARDABLE     "cursor7c.cur"
+POINTER                    star  DISCARDABLE     "cursor7e.cur"
+POINTER                  target  DISCARDABLE     "cursor80.cur"
+POINTER                  tcross  DISCARDABLE     "cursor82.cur"
+POINTER          top_left_arrow  DISCARDABLE     "cursor84.cur"
+POINTER         top_left_corner  DISCARDABLE     "cursor86.cur"
+POINTER        top_right_corner  DISCARDABLE     "cursor88.cur"
+POINTER                top_side  DISCARDABLE     "cursor8a.cur"
+POINTER                 top_tee  DISCARDABLE     "cursor8c.cur"
+POINTER                    trek  DISCARDABLE     "cursor8e.cur"
+POINTER                ul_angle  DISCARDABLE     "cursor90.cur"
+POINTER                umbrella  DISCARDABLE     "cursor92.cur"
+POINTER                ur_angle  DISCARDABLE     "cursor94.cur"
+POINTER                   watch  DISCARDABLE     "cursor96.cur"
+POINTER                   xterm  DISCARDABLE     "cursor98.cur"

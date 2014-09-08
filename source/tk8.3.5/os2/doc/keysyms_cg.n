@@ -1,0 +1,172 @@
+'\"
+'\" Copyright (c) 1998-2000 by Scriptics Corporation.
+'\" Copyright (c) 2002 by Illya Vaes
+'\" All rights reserved.
+'\" 
+'\" RCS: @(#) $Id: keysyms.n,v 1.3 2000/06/30 20:33:44 ericm Exp $
+'\" 
+'\"
+.so man.macros
+.TH keysyms_cg n 8.3 Tk "Tk Built-In Commands"
+.BS
+'\" Note:  do not modify the .SH NAME line immediately below!
+.SH NAME
+keysyms_cg \- Cyrillic and Greek keysyms recognized by Tk
+.BE
+
+.SH DESCRIPTION
+.PP
+Tk recognizes many keysyms when specifying key bindings (eg, 
+\fBbind . <Key-\fR\fIkeysym\fR\fB>\fR).  The following list enumerates the
+Cyrillic and Greek keysyms that will be recognized by Tk.  Note that not all
+keysyms will be valid on all platforms.  For example, on Unix systems, the
+presence of a particular keysym is dependant on the configuration of the
+keyboard modifier map.  This list shows keysyms along with their
+decimal and hexidecimal values.
+.PP
+'\" Moved from generic keysyms.c to separate manpage because of limits IPFC
+.CS
+Cyrillic_io                       1699     0x06a3
+Cyrillic_IO                       1715     0x06b3
+Cyrillic_yu                       1728     0x06c0
+Cyrillic_a                        1729     0x06c1
+Cyrillic_be                       1730     0x06c2
+Cyrillic_tse                      1731     0x06c3
+Cyrillic_de                       1732     0x06c4
+Cyrillic_ie                       1733     0x06c5
+Cyrillic_ef                       1734     0x06c6
+Cyrillic_ghe                      1735     0x06c7
+Cyrillic_ha                       1736     0x06c8
+Cyrillic_i                        1737     0x06c9
+Cyrillic_shorti                   1738     0x06ca
+Cyrillic_ka                       1739     0x06cb
+Cyrillic_el                       1740     0x06cc
+Cyrillic_em                       1741     0x06cd
+Cyrillic_en                       1742     0x06ce
+Cyrillic_o                        1743     0x06cf
+Cyrillic_pe                       1744     0x06d0
+Cyrillic_ya                       1745     0x06d1
+Cyrillic_er                       1746     0x06d2
+Cyrillic_es                       1747     0x06d3
+Cyrillic_te                       1748     0x06d4
+Cyrillic_u                        1749     0x06d5
+Cyrillic_zhe                      1750     0x06d6
+Cyrillic_ve                       1751     0x06d7
+Cyrillic_softsign                 1752     0x06d8
+Cyrillic_yeru                     1753     0x06d9
+Cyrillic_ze                       1754     0x06da
+Cyrillic_sha                      1755     0x06db
+Cyrillic_e                        1756     0x06dc
+Cyrillic_shcha                    1757     0x06dd
+Cyrillic_che                      1758     0x06de
+Cyrillic_hardsign                 1759     0x06df
+Cyrillic_YU                       1760     0x06e0
+Cyrillic_A                        1761     0x06e1
+Cyrillic_BE                       1762     0x06e2
+Cyrillic_TSE                      1763     0x06e3
+Cyrillic_DE                       1764     0x06e4
+Cyrillic_IE                       1765     0x06e5
+Cyrillic_EF                       1766     0x06e6
+Cyrillic_GHE                      1767     0x06e7
+Cyrillic_HA                       1768     0x06e8
+Cyrillic_I                        1769     0x06e9
+Cyrillic_SHORTI                   1770     0x06ea
+Cyrillic_KA                       1771     0x06eb
+Cyrillic_EL                       1772     0x06ec
+Cyrillic_EM                       1773     0x06ed
+Cyrillic_EN                       1774     0x06ee
+Cyrillic_O                        1775     0x06ef
+Cyrillic_PE                       1776     0x06f0
+Cyrillic_YA                       1777     0x06f1
+Cyrillic_ER                       1778     0x06f2
+Cyrillic_ES                       1779     0x06f3
+Cyrillic_TE                       1780     0x06f4
+Cyrillic_U                        1781     0x06f5
+Cyrillic_ZHE                      1782     0x06f6
+Cyrillic_VE                       1783     0x06f7
+Cyrillic_SOFTSIGN                 1784     0x06f8
+Cyrillic_YERU                     1785     0x06f9
+Cyrillic_ZE                       1786     0x06fa
+Cyrillic_SHA                      1787     0x06fb
+Cyrillic_E                        1788     0x06fc
+Cyrillic_SHCHA                    1789     0x06fd
+Cyrillic_CHE                      1790     0x06fe
+Cyrillic_HARDSIGN                 1791     0x06ff
+Greek_ALPHAaccent                 1953     0x07a1
+Greek_EPSILONaccent               1954     0x07a2
+Greek_ETAaccent                   1955     0x07a3
+Greek_IOTAaccent                  1956     0x07a4
+Greek_IOTAdiaeresis               1957     0x07a5
+Greek_IOTAaccentdiaeresis         1958     0x07a6
+Greek_OMICRONaccent               1959     0x07a7
+Greek_UPSILONaccent               1960     0x07a8
+Greek_UPSILONdieresis             1961     0x07a9
+Greek_UPSILONaccentdieresis       1962     0x07aa
+Greek_OMEGAaccent                 1963     0x07ab
+Greek_alphaaccent                 1969     0x07b1
+Greek_epsilonaccent               1970     0x07b2
+Greek_etaaccent                   1971     0x07b3
+Greek_iotaaccent                  1972     0x07b4
+Greek_iotadieresis                1973     0x07b5
+Greek_iotaaccentdieresis          1974     0x07b6
+Greek_omicronaccent               1975     0x07b7
+Greek_upsilonaccent               1976     0x07b8
+Greek_upsilondieresis             1977     0x07b9
+Greek_upsilonaccentdieresis       1978     0x07ba
+Greek_omegaaccent                 1979     0x07bb
+Greek_ALPHA                       1985     0x07c1
+Greek_BETA                        1986     0x07c2
+Greek_GAMMA                       1987     0x07c3
+Greek_DELTA                       1988     0x07c4
+Greek_EPSILON                     1989     0x07c5
+Greek_ZETA                        1990     0x07c6
+Greek_ETA                         1991     0x07c7
+Greek_THETA                       1992     0x07c8
+Greek_IOTA                        1993     0x07c9
+Greek_KAPPA                       1994     0x07ca
+Greek_LAMBDA                      1995     0x07cb
+Greek_MU                          1996     0x07cc
+Greek_NU                          1997     0x07cd
+Greek_XI                          1998     0x07ce
+Greek_OMICRON                     1999     0x07cf
+Greek_PI                          2000     0x07d0
+Greek_RHO                         2001     0x07d1
+Greek_SIGMA                       2002     0x07d2
+Greek_TAU                         2004     0x07d4
+Greek_UPSILON                     2005     0x07d5
+Greek_PHI                         2006     0x07d6
+Greek_CHI                         2007     0x07d7
+Greek_PSI                         2008     0x07d8
+Greek_OMEGA                       2009     0x07d9
+Greek_alpha                       2017     0x07e1
+Greek_beta                        2018     0x07e2
+Greek_gamma                       2019     0x07e3
+Greek_delta                       2020     0x07e4
+Greek_epsilon                     2021     0x07e5
+Greek_zeta                        2022     0x07e6
+Greek_eta                         2023     0x07e7
+Greek_theta                       2024     0x07e8
+Greek_iota                        2025     0x07e9
+Greek_kappa                       2026     0x07ea
+Greek_lambda                      2027     0x07eb
+Greek_mu                          2028     0x07ec
+Greek_nu                          2029     0x07ed
+Greek_xi                          2030     0x07ee
+Greek_omicron                     2031     0x07ef
+Greek_pi                          2032     0x07f0
+Greek_rho                         2033     0x07f1
+Greek_sigma                       2034     0x07f2
+Greek_finalsmallsigma             2035     0x07f3
+Greek_tau                         2036     0x07f4
+Greek_upsilon                     2037     0x07f5
+Greek_phi                         2038     0x07f6
+Greek_chi                         2039     0x07f7
+Greek_psi                         2040     0x07f8
+Greek_omega                       2041     0x07f9
+.CE
+
+.SH "SEE ALSO"
+bind
+
+.SH KEYWORDS
+keysym, bind, binding

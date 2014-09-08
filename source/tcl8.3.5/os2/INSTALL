@@ -1,0 +1,25 @@
+# Following files need added #if defined(__OS2__) like __WIN32__ etc.
+# either copy them to generic or compile them from here (latter: not for .h)
+ren ..\generic\tcl.h tcl.h.orig
+copy tcl.h ..\generic
+ren ..\generic\tclInt.h tclInt.h.orig
+copy tclInt.h ..\generic
+ren ..\generic\tclPort.h tclPort.h.orig
+copy tclPort.h ..\generic
+ren ..\generic\tclInt.decls tclInt.decls.orig
+copy tclInt.decls ..\generic
+ren ..\generic\tcl.decls tcl.decls.orig
+copy tcl.decls ..\generic
+#copy tclAlloc.c ..\generic
+#copy tcl2c.c ..\generic
+#copy tclCmdAH.c ..\generic
+#copy tclLoad.c ..\generic
+#copy tclTest.c ..\generic
+ren ..\doc\registry.n registry.n.orig
+copy registry.n ..\doc
+ren ..\tools\genStubs.tcl genStubs.tcl.orig
+copy tools\genStubs.tcl ..\tools
+# Now generate Stubs with "make genstubs", only then start compiling
+(for bootstrapping without a previous tclsh8x, copy generated files 
+tclDecls.h tclIntDecls.h tclIntPlatDecls.h tclPlatDecls.h tclStubInit.c
+to a safe place)

@@ -1,0 +1,7 @@
+#include <os2.h>
+#define Tcl 1
+;
+; Icons
+;
+
+ICON                     Tcl    DISCARDABLE     "Tcl83.ico"

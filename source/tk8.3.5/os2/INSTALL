@@ -1,0 +1,35 @@
+# Following files need added #if defined(__OS2__) like __WIN32__
+# either copy them to generic or compile the from here (latter: not for .h)
+ren ..\generic\tkStubInit.c tkStubInit.c.orig
+copy tkStubInit.c ..\generic
+ren ..\generic\default.h default.h.orig
+copy default.h ..\generic
+ren ..\generic\tkPort.h tkPort.h.orig
+copy tkPort.h ..\generic
+ren ..\library\button.tcl button.tcl.orig
+copy library\button.tcl ..\library
+ren ..\library\console.tcl console.tcl.orig
+copy library\console.tcl ..\library
+ren ..\library\entry.tcl entry.tcl.orig
+copy library\entry.tcl ..\library
+ren ..\library\scrlbar.tcl scrlbar.tcl.orig
+copy library\scrlbar.tcl ..\library
+ren ..\library\text.tcl text.tcl.orig
+copy library\text.tcl ..\library
+ren ..\library\tk.tcl tk.tcl.orig
+copy library\tk.tcl ..\library
+ren ..\library\demos\menu.tcl menu.tcl.orig
+copy library\demos\menu.tcl ..\library\demos
+#copy tkCanvPs.c ..\generic
+#copy tkImgPhoto.c ..\generic
+#copy tkMain.c ..\generic
+#copy tkSend.c ..\generic
+#copy tkTest.c ..\generic   (includes OS/2 specific code)
+#copy tkWindow.c ..\generic
+ren ..\doc\keysyms.n keysyms.n.orig
+copy doc\keysyms.n ..\doc
+copy doc\keysyms_cg.n ..\doc
+# Now generate Stubs with "make genstubs", only then start compiling
+(for bootstrapping without a previous tclsh8x, copy generated files
+tkDecls.h tkIntDecls.h tkIntPlatDecls.h tkPlatDecls.h tkIntXlibDecls.h
+tkStubInit.c to edefault.h safe place)

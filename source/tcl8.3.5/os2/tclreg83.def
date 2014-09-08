@@ -1,0 +1,9 @@
+LIBRARY tclreg83 INITINSTANCE TERMINSTANCE
+DESCRIPTION 'Registry (Profile) module for Tcl 8.3 for OS/2 - Copyright 2002 Illya Vaes'
+EXETYPE OS2
+DATA MULTIPLE
+PROTMODE
+STACKSIZE 0x00030000
+EXPORTS
+
+  "Registry_Init" @1
